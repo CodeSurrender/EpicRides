@@ -1,0 +1,6 @@
+framework module Pods_EliteShowroomTests {
+  umbrella header "Pods-EliteShowroomTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

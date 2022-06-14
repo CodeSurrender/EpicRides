@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-EliteShowroom-EliteShowroomUITests/Pods-EliteShowroom-EliteShowroomUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SDWebImageWebPCoder/SDWebImageWebPCoder.framework
+${BUILT_PRODUCTS_DIR}/SwiftSVG/SwiftSVG.framework
+${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework
