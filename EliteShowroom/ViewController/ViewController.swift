@@ -8,7 +8,8 @@
 
 import UIKit
 import SwiftSVG
-import SDWebImageWebPCoder
+import Kingfisher
+import KingfisherWebP
 
 var myView = UIViewController()
 var table = UITableView()
@@ -20,11 +21,9 @@ var detail2 = [Welcome3]()
 var media3 = [Welcome4]()
 var link3 = String()
 
-
 class DashboardTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTabBar()
     }
     
@@ -55,12 +54,11 @@ class DashboardTabBarController: UITabBarController, UITabBarControllerDelegate 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //myView = self
-        
-        print("Hello World")
         parser.parse{
             datax in
             make1 = datax
@@ -70,12 +68,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.view.backgroundColor = .black
         setupTableView()
-        
     }
     
-
     func setupTableView() {
-        
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = .singleLine
@@ -109,15 +104,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(make1[indexPath.row].name)
         let carName = make1[indexPath.row].name
         print(make1[indexPath.row].imageURL)
-        if carName == "BMW" || carName == "Honda" || carName == "Nissan" || carName == "Mercedes-Benz"  {
+        if carName == "BMW" || carName == "Honda" || carName == "Nissan" || carName == "Mercedes-Benz" || carName == "Hyundai"  || carName == "Kia" || carName == "Lexus"  || carName == "Volkswagen" {
             let svgURL = URL(string: make1[indexPath.row].imageURL)!
             let hammock = UIView(SVGURL: svgURL) { (svgLayer) in
                 svgLayer.resizeToFit(cell.nasaimageView.bounds)
             }
             cell.nasaimageView.addSubview(hammock)
-        } else if carName == "Jaguar" || carName == "Toyota" {
+        } else if carName == "Jaguar" || carName == "Toyota"  || carName == "Audi" || carName == "Land Rover" {
             cell.nasaimageView.downloaded(from: (make1[indexPath.row].imageURL))
-        } else if carName == "Isuzu" || carName == "Mazda" || carName == "Mitsubishi" || carName == "Subaru" {
+        } else if carName == "Isuzu" || carName == "Mazda" || carName == "Mitsubishi" || carName == "Subaru"{
             cell.nasaimageView.image = UIImage(named: "missing_car")
         }
         cell.nasaimageView.backgroundColor = .white
@@ -179,8 +174,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     }
 
+var arrayToAppend = [Result]()
 
 class ViewController2: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate  {
+    
+    var limit = 3
+    var currentPage = 1
+    var total = Int()
+    var completeArray = [Result]()
     
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -209,10 +210,11 @@ class ViewController2: UIViewController, UITableViewDataSource, UITableViewDeleg
         // Do any additional setup after loading the view, typically from a nib.
         //myView = self
         print("Hello WorldX")
-        parser2.parse{
+        parser2.parse(page: 1){
             datax in
             list2 = datax
             filtered = list2
+            self.total = make1.count
             DispatchQueue.main.sync {
                 table2.reloadData()
             }
@@ -220,8 +222,8 @@ class ViewController2: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.navigationItem.title = "Makes"
         self.view.backgroundColor = .black
         setupTableView()
-        
     }
+    
     let searchBar = UISearchBar()
     func setupTableView() {
         table2.frame = CGRect.init(x: 0, y: 50, width: self.view.frame.width, height: self.view.frame.height-50)
@@ -238,22 +240,27 @@ class ViewController2: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtered.count
+        return arrayToAppend.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = nasaMedia(frame: CGRect(x: 0,y: 0,width: self.view.frame.width,height: 100), title: "nasaMedia")
         print("Madam2")
         //Cell Population
-        let filename = filtered[indexPath.row].imageURL
+        let filename = arrayToAppend[indexPath.row].imageURL
         let extensionType = (filename as NSString).pathExtension
         print("extensionA")
-        print(filtered[indexPath.row].title + " " + extensionType)
-        cell.nasaimageView.downloaded(from: (filtered[indexPath.row].imageURL))
+        print(arrayToAppend[indexPath.row].title + " " + extensionType)
+        cell.nasaimageView.downloaded(from: (arrayToAppend[indexPath.row].imageURL))
         cell.nasaimageView.contentMode = .scaleAspectFill
+        if extensionType == "webp" {
+            cell.nasaimageView.image = UIImage(named: "missing_car")
+            cell.nasaimageView.backgroundColor = .white
+            cell.nasaimageView.contentMode = .scaleAspectFit
+        }
         cell.nasaimageView.layer.masksToBounds = true
-        cell.nasatitle.text = filtered[indexPath.row].title
-        cell.date.text = filtered[indexPath.row].city
+        cell.nasatitle.text = arrayToAppend[indexPath.row].title
+        cell.date.text = arrayToAppend[indexPath.row].city
         cell.date.textColor = .gray
         cell.date.numberOfLines = 0
         cell.date.font = cell.date.font.withSize(18)
@@ -294,11 +301,30 @@ class ViewController2: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = list2.compactMap({ $0 }).filter { $0.title.contains(searchText) }
-        if searchText == "" || searchText == nil {
-        filtered = list2
+        arrayToAppend = list2.compactMap({ $0 }).filter { $0.title.contains(searchText) }
+        //if searchText == "" || searchText == nil {
+        // filtered = list2
+        //  }
+        table2.reloadData()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // UITableView only moves in one direction, y axis
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+
+        print("scrollViewDidEndDragging")
+        if maximumOffset - currentOffset <= 10.0 {
+        let tempCount = count + 3
+        while count < tempCount && count < list2.count {
+            if (arrayToAppend.count <= list2.count){
+                arrayToAppend.append(list2[count-1])
+                count = count + 1
+                }
         }
         table2.reloadData()
+        }
+        
     }
 }
 
@@ -355,8 +381,6 @@ var button2 = UIButton()
 var media = UILabel()
 
 class ViewController4: UIViewController{
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -438,14 +462,12 @@ struct nasaParser{
     }
     
 }
-
-
-    
+var count = 0
 struct nasaParser2{
     
     
     // Retrieve Data From API 1
-    func parse(comp : @escaping ([Result])->()){
+    func parse(page : Int, comp : @escaping ([Result])->()){
         
         print("loading...")
         let api = URL(string: "https://api.staging.myautochek.com/v1/inventory/car/search")
@@ -472,6 +494,13 @@ struct nasaParser2{
                 print(result.pagination.total)
                 list2 = result.result
                 filtered = list2
+                print("Search count")
+                print(list2.count)
+                while count < 3 {
+                    arrayToAppend.append(list2[count])
+                    count = count + 1
+                }
+                count = count + 3
                 DispatchQueue.main.sync {
                 table2.reloadData()
                 }

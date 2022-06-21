@@ -6,7 +6,7 @@ target 'EliteShowroom' do
   use_frameworks!
 
   pod 'SwiftSVG', '~> 2.2.1'
-  pod 'SDWebImageWebPCoder', '~> 0.1.0 '
+  pod 'KingfisherWebP', '0.2.1'
 
   # Pods for EliteShowroom
 

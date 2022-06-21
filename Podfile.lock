@@ -1,4 +1,8 @@
 PODS:
+  - Kingfisher (3.13.1)
+  - KingfisherWebP (0.2.1):
+    - Kingfisher (~> 3.0)
+    - libwebp
   - libwebp (1.2.1):
     - libwebp/demux (= 1.2.1)
     - libwebp/mux (= 1.2.1)
@@ -8,29 +12,25 @@ PODS:
   - libwebp/mux (1.2.1):
     - libwebp/demux
   - libwebp/webp (1.2.1)
-  - SDWebImage/Core (5.12.6)
-  - SDWebImageWebPCoder (0.1.5):
-    - libwebp (~> 1.0)
-    - SDWebImage/Core (>= 5.0.0-beta4)
   - SwiftSVG (2.2.1)
 
 DEPENDENCIES:
-  - SDWebImageWebPCoder (~> 0.1.5)
+  - KingfisherWebP (= 0.2.1)
   - SwiftSVG (~> 2.2.1)
 
 SPEC REPOS:
   trunk:
+    - Kingfisher
+    - KingfisherWebP
     - libwebp
-    - SDWebImage
-    - SDWebImageWebPCoder
     - SwiftSVG
 
 SPEC CHECKSUMS:
+  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
+  KingfisherWebP: b79e6572e082bf8de3d9b147ec614ea54cf91686
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
-  SDWebImage: a47aea9e3d8816015db4e523daff50cfd294499d
-  SDWebImageWebPCoder: 082a55a220770521cf7ca29714100f5ddde69be6
   SwiftSVG: e55084e4c5534f3f25743003a6a3a88580cacfb0
 
-PODFILE CHECKSUM: fab76bd587a65733ade850c29b44fbd97e3b49b0
+PODFILE CHECKSUM: c9563c565cbcc960833bf1c717a85531ce9f3d30
 
 COCOAPODS: 1.11.3

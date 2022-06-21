@@ -51,7 +51,7 @@
 		9A97A8E91A838459BEB968B4 /* Pods-EliteShowroomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EliteShowroomTests.release.xcconfig"; path = "Target Support Files/Pods-EliteShowroomTests/Pods-EliteShowroomTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE7621A80747A480E59760B8 /* Pods_EliteShowroomTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EliteShowroomTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0B5E22284EF17800AED985 /* EliteShowroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EliteShowroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED0B5E25284EF17800AED985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ED0B5E25284EF17800AED985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.applescript; };
 		ED0B5E27284EF17800AED985 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ED0B5E2A284EF17800AED985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED0B5E2C284EF17B00AED985 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
