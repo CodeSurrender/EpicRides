@@ -347,25 +347,70 @@ class ViewController3: UIViewController{
     
     func setupTableView() {
         self.view.backgroundColor = .white
-        label = UILabel(frame: CGRect(x: 0, y: 20, width: 200, height: 21))
-        label.textAlignment = .center
+        label = UILabel(frame: CGRect(x: 10, y: 30, width: 400, height: 21))
+        label.textAlignment = .left
         self.view.addSubview(label)
-        
-     
-        
-        button = UIButton(frame: CGRect(x: 10, y: 60, width: 200, height: 21))
+ 
+        button = UIButton(frame: CGRect(x: 10, y: 60, width: 80, height: 21))
         button.setTitle("Media",for: .normal)
-        button.backgroundColor = .orange
+        button.contentHorizontalAlignment = .center
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
         button.addTarget(self, action: #selector(pressed), for: .touchUpInside)
-
         self.view.addSubview(button)
         
-        button1 = UIButton(frame: CGRect(x: 10, y: 100, width: 200, height: 21))
+        button1 = UIButton(frame: CGRect(x: 10, y: 90, width: 80, height: 21))
         button1.setTitle("Close",for: .normal)
-        button1.backgroundColor = .orange
+        button1.contentHorizontalAlignment = .center
+        button1.setTitleColor(.white, for: .normal)
+        button1.backgroundColor = .black
         button1.addTarget(self, action: #selector(pressed2), for: .touchUpInside)
-        
         self.view.addSubview(button1)
+        
+        carData = UILabel(frame: CGRect(x: 10, y: 120, width: 400, height: 20))
+        self.view.addSubview(carData)
+        
+        carData1 = UILabel(frame: CGRect(x: 10, y: 150, width: 400, height: 20))
+        self.view.addSubview(carData1)
+        
+        carData2 = UILabel(frame: CGRect(x: 10, y: 180, width: 400, height: 20))
+        self.view.addSubview(carData2)
+        
+        carData3 = UILabel(frame: CGRect(x: 10, y: 210, width: 400, height: 20))
+        self.view.addSubview(carData3)
+        
+        carData4 = UILabel(frame: CGRect(x: 10, y: 240, width: 400, height: 20))
+        self.view.addSubview(carData4)
+        
+        carData5 = UILabel(frame: CGRect(x: 10, y: 270, width: 400, height: 20))
+        self.view.addSubview(carData5)
+        
+        carData6 = UILabel(frame: CGRect(x: 10, y: 300, width: 400, height: 20))
+        self.view.addSubview(carData6)
+        
+        carData7 = UILabel(frame: CGRect(x: 10, y: 330, width: 400, height: 20))
+        self.view.addSubview(carData7)
+        
+        carData8 = UILabel(frame: CGRect(x: 10, y: 360, width: 400, height: 20))
+        self.view.addSubview(carData8)
+        
+        carData9 = UILabel(frame: CGRect(x: 10, y: 390, width: 400, height: 20))
+        self.view.addSubview(carData9)
+        
+        carData10 = UILabel(frame: CGRect(x: 10, y: 420, width: 400, height: 20))
+        self.view.addSubview(carData10)
+        
+        carData11 = UILabel(frame: CGRect(x: 10, y: 450, width: 400, height: 20))
+        self.view.addSubview(carData11)
+        
+        carData12 = UILabel(frame: CGRect(x: 10, y: 480, width: 400, height: 20))
+        self.view.addSubview(carData12)
+        
+        carData13 = UILabel(frame: CGRect(x: 10, y: 510, width: 400, height: 20))
+        self.view.addSubview(carData13)
+        
+        carData14 = UILabel(frame: CGRect(x: 10, y: 540, width: 400, height: 20))
+        self.view.addSubview(carData14)
     }
     @objc func pressed() {
         let loadVC = ViewController4()
@@ -373,12 +418,28 @@ class ViewController3: UIViewController{
     @objc func pressed2() {
         self.dismiss(animated: true, completion: nil)
     }
+    
 }
 var label = UILabel()
 var button = UIButton()
 var button1 = UIButton()
 var button2 = UIButton()
 var media = UILabel()
+var carData = UILabel()
+var carData1 = UILabel()
+var carData2 = UILabel()
+var carData3 = UILabel()
+var carData4 = UILabel()
+var carData5 = UILabel()
+var carData6 = UILabel()
+var carData7 = UILabel()
+var carData8 = UILabel()
+var carData9 = UILabel()
+var carData10 = UILabel()
+var carData11 = UILabel()
+var carData12 = UILabel()
+var carData13 = UILabel()
+var carData14 = UILabel()
 
 class ViewController4: UIViewController{
     
@@ -550,7 +611,23 @@ struct nasaParser3{
                 print("Boom1")
                 print(detail2[0].carName)
                 DispatchQueue.main.sync {
-                label.text = detail2[0].carName
+                    label.text = "Name : " + detail2[0].carName!
+                    carData.text = "Model : " + (detail2[0].model?.name)!
+                    carData1.text = "Price : " +  "\(detail2[0].marketplacePrice!)"
+                    carData2.text = "Body : " + (detail2[0].bodyType?.name)!
+                    carData3.text = "City : " + detail2[0].city!
+                carData4.text = "Deposit : " +  (detail2[0].depositReceived == true ? "Yes" : "No")
+                    carData5.text = "Engine Type : " + detail2[0].engineType!
+                    carData6.text = "Body Color : " + detail2[0].exteriorColor!
+                    carData7.text = "Owner : " + detail2[0].ownerType!
+                carData8.text = "Waranty : " + (detail2[0].hasWarranty == true ? "Yes" : "No")
+                    carData9.text = "Loan percentage : " + (detail2[0].financingSettings?.loanCalculator?.loanPercentage!  != nil ? "\( round(1000 * detail2[0].financingSettings!.loanCalculator!.loanPercentage!)/1000) %" : "Yet to confirm")
+                    carData10.text = "Inspected : " + (detail2[0].inspectorDetails?.totalInspection! != nil ? "\(detail2[0].inspectorDetails!.totalInspection!)" : "No")
+                    carData11.text = "Mileage : " + "\(detail2[0].mileage!) " + detail2[0].mileageUnit!
+                carData12.text = "Condition : " + detail2[0].sellingCondition!
+                carData13.text = "Transmission : " + detail2[0].transmission!
+                carData14.text = "Year : " + "\(detail2[0].year!)"
+
                 }
                 
             } catch {
